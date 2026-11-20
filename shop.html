@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop | Golden Agro Foodz</title>
+<meta name="description" content="Order honey, mustard oil, turmeric powder, honey rose gulkand and farm eggs from Golden Agro Foodz, Baba Bakala Sahib, Amritsar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0b7a3b; --deep:#06361c; --ink:#0a2616; --ivory:#fffdf6; --sand:#f6efd8;
+  --gold:#c9972f; --gold-hi:#f3dc84;
+  --gold-grad:linear-gradient(120deg,#a97a1e 0%,#f3dc84 40%,#c9972f 62%,#f0d676 100%);
+  --serif:"Fraunces",Georgia,"Times New Roman",serif; --sans:"Manrope",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --pad:clamp(18px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ivory);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+.gold-text{background:var(--gold-grad);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shimmer 7s linear infinite}
+@keyframes shimmer{to{background-position:-220% 0}}
+h1,h2,h3{font-family:var(--serif);font-weight:900;letter-spacing:-.02em;line-height:1.02;text-wrap:balance}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .25s,background .25s,color .25s;font-family:var(--sans)}
+.btn:hover{transform:translateY(-2px)}
+.btn--gold{background:var(--gold-grad);color:#2a1d03;border-color:#e9cf7a}
+.btn--green{background:var(--green);color:#fff}
+.btn--line{border-color:currentColor;background:transparent}
+/* header */
+header.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px var(--pad);background:rgb(255 253 246/.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgb(201 151 47/.35)}
+header.top img{height:46px;width:auto}
+header.top nav{display:flex;gap:clamp(14px,2.4vw,32px);font-weight:600;font-size:14px}
+header.top nav a{text-decoration:none;position:relative;padding:6px 0}
+header.top nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold-grad);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+header.top nav a:hover::after{transform:scaleX(1)}
+.progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:60;background:var(--gold-grad);transform:scaleX(0);transform-origin:0 50%}
+@media(max-width:760px){header.top nav{display:none}header.top img{height:40px}}
+/* hero */
+.hero{position:relative;min-height:100svh;padding:110px var(--pad) 60px;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,4vw,60px);align-items:center;background:radial-gradient(1200px 600px at 85% 20%,#fff6d6 0%,transparent 60%),var(--ivory);overflow:hidden}
+.hero__kicker{display:inline-flex;gap:10px;align-items:center;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:18px}
+.hero__kicker::before{content:"";width:34px;height:3px;background:var(--gold-grad);border-radius:3px}
+.hero h1{font-size:clamp(46px,8vw,118px);color:var(--deep)}
+.hero h1 em{font-style:normal;display:block}
+.hero p.lead{margin-top:22px;max-width:46ch;font-size:clamp(16px,1.4vw,19px);color:#2f4a38}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero__badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.chip{font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgb(201 151 47/.55);color:var(--deep)}
+.arches{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end;transform:translate3d(0,calc(var(--sy,0)*-.06px),0)}
+.arch{overflow:hidden;border-radius:999px 999px 24px 24px;border:3px solid #e9cf7a;box-shadow:0 24px 50px rgb(6 54 28/.22);background:var(--sand)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.arch:nth-child(1){aspect-ratio:3/4.4}
+.arch:nth-child(2){aspect-ratio:3/3.4;margin-bottom:46px}
+.arch:nth-child(3){aspect-ratio:3/3.4;margin-top:-46px}
+.arch:nth-child(4){aspect-ratio:3/4.4}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:96px}.arches{max-width:520px}}
+/* marquee */
+.marquee{background:var(--deep);color:#fff;overflow:hidden;padding:16px 0;border-block:3px solid #e9cf7a}
+.marquee__row{display:flex;gap:44px;width:max-content;animation:slide 28s linear infinite;font-family:var(--serif);font-weight:700;font-size:clamp(20px,3vw,32px);white-space:nowrap}
+.marquee__row span{display:inline-flex;align-items:center;gap:44px}
+.marquee__row span::after{content:"✦";color:var(--gold-hi);font-size:.6em}
+@keyframes slide{to{transform:translateX(-50%)}}
+/* products: stacked cards */
+.products{padding:clamp(70px,10vw,140px) var(--pad) 60px}
+.sec-head{max-width:1100px;margin:0 auto 46px;display:grid;gap:14px}
+.sec-head h2{font-size:clamp(38px,6vw,84px);color:var(--deep)}
+.sec-head p{max-width:56ch;color:#35503f}
+.stack{max-width:1180px;margin:0 auto;display:block}
+.card{position:relative;margin-bottom:34px;border-radius:36px;padding:clamp(22px,3.4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3.4vw,50px);align-items:center;min-height:min(72svh,640px);box-shadow:0 -12px 40px rgb(6 54 28/.16);overflow:hidden}
+.card:nth-child(even){direction:rtl}
+.card:nth-child(even)>*{direction:ltr}
+.card__no{font-family:var(--serif);font-weight:900;font-size:clamp(70px,10vw,150px);line-height:.8;opacity:.9}
+.card h3{font-size:clamp(34px,5vw,68px);margin:8px 0 14px}
+.card p{max-width:46ch}
+.card ul{list-style:none;margin:18px 0 26px;display:grid;gap:8px}
+.card li{display:flex;gap:10px;align-items:flex-start;font-weight:600}
+.card li::before{content:"";flex:none;width:9px;height:9px;margin-top:8px;border-radius:50%;background:var(--gold-grad)}
+.card__media{position:relative}
+.card__media .big{border-radius:200px 200px 28px 28px;overflow:hidden;aspect-ratio:4/4.6;border:3px solid #e9cf7a;box-shadow:0 22px 44px rgb(0 0 0/.28)}
+.card__media .big img{width:100%;height:100%;object-fit:cover}
+.card--honey{--i:0;background:linear-gradient(160deg,#07421f,#052c15);color:#fff8e2}
+.card--oil{--i:1;background:linear-gradient(160deg,#f7e7a6,#e2b94d);color:#2a1d03}
+.card--turmeric{--i:2;background:linear-gradient(160deg,#0f8a43,#0a6a32);color:#fffbea}
+.card--gulkand{--i:3;background:linear-gradient(160deg,#7a2145,#4a1229);color:#fff1de}
+.card--eggs{--i:4;background:linear-gradient(160deg,#fffdf6,#f6efd8);color:var(--ink);border:3px solid #e9cf7a}
+.card--honey .card__no,.card--turmeric .card__no,.card--gulkand .card__no{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.card--oil .card__no{color:#fff;text-shadow:0 2px 0 rgb(0 0 0/.12)}
+.card--eggs .card__no{color:var(--green)}
+.card__media .big img{transition:opacity .25s,transform .6s}.card__media .big img.swap{opacity:0;transform:scale(1.04)}
+.card--oil .btn--line{color:#2a1d03}
+.card--eggs .btn--line{color:var(--green)}
+.vars{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 24px}
+.vars figure{width:68px;text-align:center;font-size:11px;font-weight:700}
+.vars img{width:68px;height:68px;border-radius:50%;object-fit:cover;border:2px solid #e9cf7a;margin-bottom:5px}
+.card__btns{display:flex;flex-wrap:wrap;gap:10px}
+.trays{display:flex;gap:8px;margin-top:-14px;margin-bottom:22px}
+@media(min-width:821px){.card{position:sticky;top:calc(84px + var(--i)*16px)}}
+@media(min-width:821px) and (max-height:760px){.card{min-height:0;padding:22px 34px}.card__no{font-size:64px}.card h3{font-size:clamp(28px,4vw,46px)}.card__media .big{aspect-ratio:16/10}}
+@media(max-width:820px){.card{grid-template-columns:1fr;min-height:0}.card:nth-child(even){direction:ltr}.card__media .big{aspect-ratio:16/11;border-radius:140px 140px 24px 24px}}
+/* process */
+.process{background:var(--sand);padding:clamp(70px,9vw,120px) var(--pad)}
+.process__row{max-width:1180px;margin:34px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.step{background:#fff;border-radius:26px;padding:26px;border:1px solid rgb(201 151 47/.45);position:relative}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--serif);font-weight:900;font-size:46px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;display:block;margin-bottom:6px}
+.step h3{font-size:24px;margin-bottom:6px;color:var(--deep)}
+.step p{font-size:14.5px;color:#35503f}
+@media(max-width:900px){.process__row{grid-template-columns:1fr 1fr}}@media(max-width:520px){.process__row{grid-template-columns:1fr}}
+/* trust */
+.trust{background:var(--deep);color:#fff;padding:clamp(70px,9vw,120px) var(--pad)}
+.trust h2{font-size:clamp(34px,5vw,70px)}
+.trust__grid{max-width:1180px;margin:36px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.seal{background:#fff;color:var(--ink);border-radius:26px;padding:22px 16px;text-align:center;display:grid;gap:10px;justify-items:center;align-content:start}
+.seal img{height:84px;width:auto;object-fit:contain}
+.seal small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--green)}
+.seal b{font-size:14px;line-height:1.35}
+@media(max-width:900px){.trust__grid{grid-template-columns:1fr 1fr}}
+/* order */
+.order{padding:clamp(70px,9vw,120px) var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);max-width:1280px;margin:0 auto;align-items:start}
+.order h2{font-size:clamp(38px,6vw,84px);color:var(--deep)}
+.order .info{display:grid;gap:18px;margin-top:26px;font-weight:600}
+.order .info div span{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:800}
+form.enq{background:#fff;border:3px solid #e9cf7a;border-radius:32px;padding:clamp(20px,3vw,34px);display:grid;gap:16px;box-shadow:0 24px 50px rgb(6 54 28/.12)}
+form.enq legend,form.enq label.l{font-weight:800;font-size:14px}
+fieldset{border:0;display:flex;flex-wrap:wrap;gap:10px}
+fieldset legend{margin-bottom:10px}
+.pick{position:relative}
+.pick input{position:absolute;opacity:0}
+.pick span{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid #d9c27a;font-weight:700;font-size:14px;cursor:pointer;transition:.2s}
+.pick input:checked+span{background:var(--green);border-color:var(--green);color:#fff}
+.pick input:focus-visible+span{outline:3px solid var(--gold);outline-offset:2px}
+form.enq input[type=text],form.enq textarea{width:100%;border:2px solid #d9c27a;border-radius:16px;padding:13px 16px;font:inherit;background:var(--ivory);color:var(--ink)}
+form.enq textarea{min-height:90px;resize:vertical}
+@media(max-width:900px){.order{grid-template-columns:1fr}}
+/* footer */
+footer{background:#04200f;color:#e9f3ea;padding:46px var(--pad) 26px}
+.foot{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto 1fr 1fr;gap:34px;align-items:start}
+.foot .tile{padding:6px 0}
+.foot .tile img{height:60px;width:auto}
+.foot h4{font-family:var(--serif);font-size:18px;margin-bottom:8px;color:var(--gold-hi)}
+.foot p{font-size:14px}
+.copy{max-width:1180px;margin:30px auto 0;padding-top:18px;border-top:1px solid rgb(255 255 255/.18);font-size:12.5px;opacity:.8;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:820px){.foot{grid-template-columns:1fr}}
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:55;width:58px;height:58px;border-radius:50%;background:#1faa59;display:grid;place-items:center;box-shadow:0 10px 24px rgb(0 0 0/.3);text-decoration:none}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+
+.top__actions{display:flex;align-items:center;gap:10px}
+.cartbtn{position:relative;width:48px;height:48px;border-radius:50%;border:2px solid #e9cf7a;background:#fff;color:var(--deep);display:grid;place-items:center;cursor:pointer}
+.cartbtn svg{width:24px;height:24px}
+.cartbtn__n{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;border-radius:11px;background:var(--gold-grad);color:#2a1d03;font-size:12px;font-weight:800;display:grid;place-items:center;padding:0 5px}
+.cartbtn.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.25)}}
+@media(max-width:520px){.hide-sm{display:none}}
+/* buy panel */
+.buy{display:grid;gap:14px;margin-top:6px}
+.vtabs{display:flex;gap:8px;flex-wrap:wrap}
+.vtab{display:grid;justify-items:center;gap:4px;width:70px;padding:0;border:0;background:none;color:inherit;font:inherit;font-size:11px;font-weight:700;cursor:pointer;opacity:.7;transition:.25s}
+.vtab img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:3px solid transparent;transition:.25s}
+.vtab[aria-pressed=true]{opacity:1}
+.vtab[aria-pressed=true] img{border-color:#f3dc84;transform:scale(1.08)}
+.buy--single .vinfo{display:none}
+.vinfo h4{font-family:var(--serif);font-size:24px;line-height:1.1}
+.vinfo p{font-size:14.5px;margin-top:4px;max-width:46ch}
+.vinfo small{display:block;margin-top:6px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:11px;opacity:.85}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size{display:grid;gap:1px;text-align:center;min-width:92px;padding:9px 14px;border-radius:18px;border:2px solid currentColor;background:transparent;color:inherit;font:inherit;cursor:pointer;opacity:.75;transition:.2s}
+.size b{font-size:16px}.size span{font-size:13px;font-weight:700}
+.size[aria-pressed=true]{opacity:1;background:var(--gold-grad);color:#2a1d03;border-color:#e9cf7a}
+.addrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qty{display:inline-flex;align-items:center;border:2px solid currentColor;border-radius:999px;height:48px}
+.qty button{width:42px;height:100%;border:0;background:none;color:inherit;font-size:20px;font-weight:700;cursor:pointer}
+.qty output{min-width:28px;text-align:center;font-weight:800}
+.price-now{font-family:var(--serif);font-weight:900;font-size:28px}
+/* cart screen */
+.scrim{position:fixed;inset:0;background:rgb(4 32 15/.55);opacity:0;pointer-events:none;transition:opacity .3s;z-index:90}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);background:var(--ivory);z-index:100;transform:translateX(102%);transition:transform .4s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 50px rgb(0 0 0/.25)}
+.drawer.open{transform:none}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:var(--deep);color:#fff}
+.drawer__head h2{font-size:26px}
+.drawer__x{width:42px;height:42px;border-radius:50%;border:2px solid rgb(255 255 255/.5);background:none;color:#fff;font-size:20px;cursor:pointer}
+.steps{display:flex;gap:6px;padding:12px 22px;background:var(--sand);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.steps span{flex:1;text-align:center;padding:8px 4px;border-radius:999px;background:#fff;color:#7a8a7e}
+.steps span.on{background:var(--green);color:#fff}
+.drawer__body{flex:1;overflow:auto;padding:18px 22px}
+.empty{text-align:center;padding:40px 10px;color:#35503f}
+.empty h3{font-size:28px;margin-bottom:8px;color:var(--deep)}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgb(201 151 47/.4)}
+.line img{width:64px;height:64px;border-radius:16px;object-fit:cover}
+.line b{display:block;font-size:15px}
+.line small{display:block;color:#4a6454;font-size:12.5px}
+.line .q{display:inline-flex;align-items:center;gap:2px;margin-top:6px;border:1.5px solid #d9c27a;border-radius:999px}
+.line .q button{width:32px;height:32px;border:0;background:none;font-size:18px;font-weight:700;cursor:pointer;color:var(--deep)}
+.line .q span{min-width:22px;text-align:center;font-weight:800;font-size:14px}
+.line .rm{border:0;background:none;color:#8a3b2a;font-size:12px;font-weight:700;cursor:pointer;margin-top:4px;text-decoration:underline}
+.line .amt{font-weight:800}
+.totals{padding:16px 22px;border-top:2px solid #e9cf7a;background:#fff;display:grid;gap:6px}
+.totals div{display:flex;justify-content:space-between;font-weight:600}
+.totals .grand{font-family:var(--serif);font-size:26px;font-weight:900;color:var(--deep)}
+.note{font-size:12px;color:#6b5a1c;background:#fff6d6;border-radius:12px;padding:8px 12px;margin-top:12px}
+.drawer__foot{display:flex;gap:10px;padding:14px 22px 22px;background:#fff}
+.drawer__foot .btn{flex:1}
+.drawer label.l{display:block;font-weight:800;font-size:13px;margin:12px 0 4px}
+.drawer input[type=text],.drawer input[type=tel],.drawer textarea{width:100%;border:2px solid #d9c27a;border-radius:14px;padding:12px 14px;font:inherit;background:#fff;color:var(--ink)}
+.drawer textarea{min-height:76px}
+.done{text-align:center;padding:30px 6px}
+.done h3{font-size:30px;color:var(--deep);margin:10px 0}
+.toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-20px);background:var(--deep);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;font-size:14px;z-index:120;opacity:0;pointer-events:none;transition:.35s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);clip-path:inset(0 0 12% 0 round 28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),clip-path 1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none;clip-path:inset(0 0 0 0 round 28px)}
+.card.rv{clip-path:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;clip-path:none;transition:none}.marquee__row,.gold-text{animation:none}html{scroll-behavior:auto}}
+
+/* shop page */
+body.shop{padding-top:78px}
+.shophead{padding:clamp(34px,5vw,70px) var(--pad) 8px;max-width:1280px;margin:0 auto}
+.shophead h1{font-size:clamp(40px,7vw,96px);color:var(--deep)}
+.shophead p{max-width:56ch;color:#35503f;margin-top:12px}
+.cats{position:sticky;top:70px;z-index:40;background:rgb(255 253 246/.92);backdrop-filter:blur(8px);border-bottom:1px solid rgb(201 151 47/.4);padding:10px var(--pad)}
+.cats__in{max-width:1280px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.cats__in::-webkit-scrollbar{display:none}
+.cat{flex:none;min-height:44px;padding:0 20px;border-radius:999px;border:2px solid #e0cb82;background:#fff;font:inherit;font-weight:700;font-size:14px;color:var(--deep);cursor:pointer;transition:.2s}
+.cat[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}
+.shopwrap{max-width:1280px;margin:0 auto;padding:26px var(--pad) 80px}
+.group{margin-bottom:46px}
+.group h2{font-size:clamp(28px,4vw,48px);color:var(--deep);margin-bottom:6px}
+.group>p{color:#35503f;margin-bottom:18px;max-width:60ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.pcard{background:#fff;border:2px solid #ecdca0;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 30px rgb(6 54 28/.10);transition:transform .3s,box-shadow .3s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgb(6 54 28/.18)}
+.pcard.hl{border-color:var(--gold);box-shadow:0 0 0 4px rgb(243 220 132/.7),0 20px 40px rgb(6 54 28/.2)}
+.pcard__img{aspect-ratio:4/3;background:var(--sand);overflow:hidden}
+.pcard__img img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.pcard__body{padding:18px 18px 20px;display:grid;gap:12px;flex:1;align-content:start}
+.pcard small.tag{font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:11px;color:var(--green)}
+.pcard h3{font-size:26px;line-height:1.05;color:var(--deep)}
+.pcard p{font-size:14px;color:#35503f}
+.pcard .size{color:var(--deep);min-width:0;flex:1}
+.pcard .qty{height:44px;color:var(--deep)}
+.pcard .addrow{justify-content:space-between}
+.pcard .addrow .btn{white-space:nowrap;min-height:44px;padding:0 20px;flex:1}
+.pcard .price-now{font-size:24px;color:var(--deep);width:100%}
+.shop-empty{display:none}
+.cartbtn{font:inherit}
+</style>
+</head>
+<body class="shop">
+<div class="progress" id="bar"></div>
+<header class="top">
+  <a href="index.html" aria-label="Golden Agro Foodz, home"><img src="images/logo-gaf.webp" alt="Golden Agro Foodz" width="424" height="294"></a>
+  <nav aria-label="Main"><a href="index.html">Home</a><a href="index.html#products">Products</a><a href="index.html#trust">Licences</a><a href="index.html#order">Contact</a></nav>
+  <div class="top__actions"><button class="cartbtn" id="cartbtn" type="button" aria-label="Open cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7zm3 0a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="cartbtn__n" id="cartn">0</span></button><a class="btn btn--green hide-sm" href="https://wa.me/918283913940?text=Hello%20Golden%20Agro%20Foodz%2C%20I%20would%20like%20to%20order.">WhatsApp</a></div>
+</header>
+<main>
+<section class="shophead">
+  <h1>The <span class="gold-text">shop.</span></h1>
+  <p>Pick a category, choose a size, add to your cart. When you are done, the cart sends your order to us on WhatsApp.</p>
+</section>
+<div class="cats"><div class="cats__in" id="cats" role="group" aria-label="Categories"></div></div>
+<div class="shopwrap" id="shop"></div>
+</main>
+<footer>
+  <div class="foot">
+    <div class="tile"><img src="images/logo-gaf.webp" alt="Golden Agro Foodz" width="424" height="294"></div>
+    <div><h4>Golden Agro Foodz</h4><p>Vill. Dharmu Chak, Teh. Baba Bakala Sahib,<br>Distt. Amritsar, Punjab (India) 143114</p><p style="margin-top:8px">+91 82839 13940</p></div>
+    <div><h4>FSSAI licences</h4><p>Lic. No. 2212064000032<br>Lic. No. 2212064000412</p></div>
+  </div>
+  <div class="copy"><span>© 2026 Golden Agro Foodz</span><span>Honey · Mustard oil · Turmeric powder · Eggs</span></div>
+</footer>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dtitle" aria-hidden="true">
+  <div class="drawer__head"><h2 id="dtitle">Your cart</h2><button class="drawer__x" id="dclose" type="button" aria-label="Close cart">✕</button></div>
+  <div class="steps" id="steps"><span class="on">1 Cart</span><span>2 Details</span><span>3 Send</span></div>
+  <div class="drawer__body" id="dbody"></div>
+  <div class="totals" id="totals"></div>
+  <div class="drawer__foot" id="dfoot"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+<a class="wa-float" href="https://wa.me/918283913940?text=Hello%20Golden%20Agro%20Foodz%2C%20I%20would%20like%20to%20order." aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.3 8.6 3.3 15.5c0 2.3.6 4.5 1.8 6.4L3 29l7.3-1.9c1.8 1 3.8 1.5 5.7 1.5 7 0 12.7-5.6 12.7-12.5S23 3 16 3zm0 22.900c-1.800 0-3.600-.5-5.100-1.400l-.4-.2-4.300 1.100 1.200-4.200-.3-.4a10.200 10.200 0 0 1-1.600-5.400C5.500 9.900 10.200 5.300 16 5.300s10.500 4.600 10.500 10.200S21.800 25.900 16 25.900zm5.800-7.600c-.3-.2-1.900-.9-2.200-1-.3-.1-.5-.2-.7.200s-.8 1-.9 1.200c-.2.200-.3.200-.6.100-1.800-.9-3-1.600-4.200-3.600-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-1-2.300c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.500s1.100 2.900 1.200 3.100c.2.200 2.100 3.300 5.200 4.600 1.900.8 2.600.9 3.600.7.600-.1 1.900-.8 2.100-1.500.3-.7.300-1.400.2-1.500-.1-.1-.3-.2-.6-.4z"/></svg></a>
+<script>
+/* ===== Shop catalogue. PRICES ARE PLACEHOLDERS: edit them here when the real rate list is ready. ===== */
+var WA='918283913940';
+var PRODUCTS={
+  honey:{name:'Honey',img:'images/m-multi.webp',
+    variants:[
+      {id:'multiflora',name:'Multiflora honey',img:'images/m-multi.webp',tag:'Hills and plains',text:'Gathered from the many flowers of the hills and the plains, with a naturally rich floral aroma and balanced sweetness for every day.',sizes:[['250g',359],['500g',629],['1kg',1124]]},
+      {id:'mustard',name:'Mustard honey',img:'images/m-mustard.webp',tag:'Mustard season',text:'Harvested in the mustard flowering season. Creamy and thick, with a pleasant floral aroma and a naturally rich sweetness.',sizes:[['250g',359],['500g',629],['1kg',1124]]},
+      {id:'jamun',name:'Jamun honey',img:'images/m-jamun.webp',tag:'Dark and rich',text:'A dark, rich honey with a deep taste. Raw and unprocessed.',sizes:[['250g',449],['500g',809],['1kg',1484]]},
+      {id:'ajwain',name:'Ajwain honey',img:'images/m-ajwain.webp',tag:'Warm and herbal',text:'An amber honey from ajwain flowers with a warm, herbal note. Raw and unprocessed.',sizes:[['250g',449],['500g',809],['1kg',1484]]},
+      {id:'kashmiri',name:'Kashmiri Acacia honey',img:'images/m-kashmiri.webp',tag:'Light and mild',text:'Collected from acacia blossoms: a light golden colour, a delicate floral aroma and a smooth, mild taste.',sizes:[['250g',629],['500g',1079],['1kg',1979]]}
+    ]},
+  oil:{name:'Mustard oil',img:'images/mustard-oil.webp',variants:[{id:'oil',name:'Mustard oil',img:'images/mustard-oil.webp',tag:'Everyday cooking',text:'Golden mustard oil with a strong, true aroma, in a clean sealed bottle.',sizes:[['500ml',120],['1L',220],['5L',1050]]}]},
+  turmeric:{name:'Turmeric powder',img:'images/turmeric.webp',variants:[{id:'turmeric',name:'Turmeric powder',img:'images/turmeric.webp',tag:'Fine ground',text:'Deep golden haldi, ground fine for dal, sabzi and milk.',sizes:[['100g',80],['200g',150],['500g',350]]}]},
+  gulkand:{name:'Gulkand',img:'images/gulkand-250.webp',variants:[{id:'gulkand',name:'Honey Rose Gulkand',img:'images/gulkand-250.webp',tag:'Rose and honey',text:'Rose petals slow-mixed with honey into a cooling, fragrant preserve. Lovely on toast, in milk or on its own.',sizes:[['250g',349,'images/gulkand-250.webp'],['400g',549,'images/gulkand-400.webp']]}]},
+  eggs:{name:'Eggs',img:'images/egg-12.webp',variants:[{id:'eggs',name:'Farm eggs',img:'images/egg-12.webp',tag:'Fresh cartons',text:'Fresh eggs in clear cartons. Choose a tray size.',sizes:[['6 eggs',60,'images/egg-6.webp'],['12 eggs',110,'images/egg-12.webp'],['30 eggs',260,'images/egg-30.webp']]}]}
+};
+var CATS=[['all','All'],['honey','Honey'],['oil','Oils'],['turmeric','Turmeric'],['gulkand','Gulkand'],['eggs','Eggs']];
+var BLURB={honey:'Five varieties, each from its own flowers. Raw and unprocessed.',oil:'Golden mustard oil for everyday cooking.',turmeric:'Deep golden haldi, ground fine.',gulkand:'Rose petals and honey, in two jar sizes.',eggs:'Fresh eggs in clear cartons: 6, 12 or 30.'};
+(function(){
+  var money=function(n){return '₹'+n.toLocaleString('en-IN')};
+  var cart=[]; try{cart=JSON.parse(localStorage.getItem('gaf-cart')||'[]')}catch(e){}
+  function save(){try{localStorage.setItem('gaf-cart',JSON.stringify(cart))}catch(e){}}
+  var $=function(i){return document.getElementById(i)};
+  var el=function(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+  function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('show')},1800)}
+  function count(){return cart.reduce(function(a,l){return a+l.q},0)}
+  function paintCount(){$('cartn').textContent=count()}
+  function add(pk,v,si,q){
+    var sz=v.sizes[si],key=v.id+'|'+sz[0];
+    var f=cart.filter(function(l){return l.key===key})[0];
+    if(f)f.q+=q;else cart.push({key:key,p:PRODUCTS[pk].name,name:v.name,size:sz[0],price:sz[1],img:v.img,q:q});
+    save();paintCount();toast('Added: '+v.name+' '+sz[0]+' × '+q);
+    var b=$('cartbtn');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');
+  }
+  window.GAFcart={add:add,open:function(){step=1;open()}};
+  /* cart screen: 1 Cart, 2 Details, 3 Send */
+  var step=1,drawer=$('drawer'),scrim=$('scrim'),sentOrder=null;
+  var info={name:'',phone:'',addr:''};
+  function subtotal(){return cart.reduce(function(a,l){return a+l.price*l.q},0)}
+  function open(){drawer.classList.add('open');scrim.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';render()}
+  function close(){drawer.classList.remove('open');scrim.classList.remove('open');drawer.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+  function msg(){
+    var t='Hello Golden Agro Foodz, I would like to order:\n';
+    cart.forEach(function(l,i){t+=(i+1)+'. '+l.name+' ('+l.size+') × '+l.q+' = '+money(l.price*l.q)+'\n'});
+    t+='Total: '+money(subtotal())+'\n\nName: '+info.name+'\nPhone: '+info.phone+'\nAddress: '+info.addr;return t;
+  }
+  function render(){
+    var body=$('dbody'),tot=$('totals'),foot=$('dfoot');
+    [].forEach.call($('steps').children,function(s,i){s.classList.toggle('on',i+1===step)});
+    body.innerHTML='';tot.innerHTML='';foot.innerHTML='';
+    if(!cart.length&&step!==3){body.innerHTML='<div class="empty"><h3>Your cart is empty</h3><p>Pick a product, choose a size and press Add to cart. It will show up here.</p></div>';var b=el('button','btn btn--green','Keep browsing');b.onclick=close;foot.append(b);return}
+    if(step===1){
+      cart.forEach(function(l,i){
+        var d=el('div','line','<img src="'+l.img+'" alt="" width="64" height="64"><div><b>'+l.name+'</b><small>'+l.size+' · '+money(l.price)+' each</small><div class="q"><button type="button" aria-label="Fewer">−</button><span>'+l.q+'</span><button type="button" aria-label="More">+</button></div><br><button class="rm" type="button">Remove</button></div><div class="amt">'+money(l.price*l.q)+'</div>');
+        var bs=d.querySelectorAll('.q button');
+        bs[0].onclick=function(){l.q=Math.max(1,l.q-1);save();paintCount();render()};
+        bs[1].onclick=function(){l.q=Math.min(99,l.q+1);save();paintCount();render()};
+        d.querySelector('.rm').onclick=function(){cart.splice(i,1);save();paintCount();render()};
+        body.append(d)});
+      body.append(el('div','note','Prices shown are placeholders until the final rate list is added. Delivery charges, if any, are confirmed on WhatsApp.'));
+      tot.innerHTML='<div><span>Subtotal</span><span>'+money(subtotal())+'</span></div><div class="grand"><span>Total</span><span>'+money(subtotal())+'</span></div>';
+      var c=el('button','btn btn--gold','Continue');c.onclick=function(){step=2;render()};foot.append(c);
+    } else if(step===2){
+      body.innerHTML='<label class="l" for="c-n">Your name</label><input id="c-n" type="text" autocomplete="name"><label class="l" for="c-p">Phone number</label><input id="c-p" type="tel" autocomplete="tel" inputmode="tel"><label class="l" for="c-a">Delivery address</label><textarea id="c-a" autocomplete="street-address"></textarea><p class="note" id="c-e" hidden style="background:#fde6e0;color:#7a2a1a">Please fill in your name, phone and address.</p>';
+      $('c-n').value=info.name;$('c-p').value=info.phone;$('c-a').value=info.addr;
+      tot.innerHTML='<div class="grand"><span>Total</span><span>'+money(subtotal())+'</span></div>';
+      var b=el('button','btn btn--line','Back');b.style.color='var(--deep)';b.onclick=function(){grab();step=1;render()};
+      var c=el('button','btn btn--gold','Review order');c.onclick=function(){grab();if(!info.name||!info.phone||!info.addr){$('c-e').hidden=false;return}step=3;render()};
+      foot.append(b,c);
+    } else {
+      var s='<div class="done"><h3>Check and send</h3><p>This is exactly what we will receive on WhatsApp.</p></div>';
+      body.innerHTML=s;var pre=el('div','note');pre.style.whiteSpace='pre-wrap';pre.style.fontSize='13px';pre.textContent=msg();body.append(pre);
+      tot.innerHTML='<div class="grand"><span>Total</span><span>'+money(subtotal())+'</span></div>';
+      var b=el('button','btn btn--line','Back');b.style.color='var(--deep)';b.onclick=function(){step=2;render()};
+      var c=el('a','btn btn--green','Send on WhatsApp');c.target='_blank';c.rel='noopener';c.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg());
+      c.onclick=function(){setTimeout(function(){cart=[];save();paintCount();step=1;render();toast('Order message opened in WhatsApp')},400)};
+      foot.append(b,c);
+    }
+  }
+  function grab(){var n=$('c-n');if(n){info.name=n.value.trim();info.phone=$('c-p').value.trim();info.addr=$('c-a').value.trim()}}
+  $('cartbtn').onclick=function(){step=1;open()};$('dclose').onclick=close;scrim.onclick=close;
+  addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  paintCount();
+})();
+</script>
+<script>
+(function(){
+  var money=function(n){return '₹'+n.toLocaleString('en-IN')};
+  var $=function(i){return document.getElementById(i)};
+  var el=function(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+  var shop=$('shop'),catsEl=$('cats'),cur='all';
+  var catBtns=CATS.map(function(c){var b=el('button','cat',c[1]);b.type='button';b.onclick=function(){show(c[0]);history.replaceState(null,'','#'+c[0])};catsEl.appendChild(b);return b});
+  var groups={};
+  Object.keys(PRODUCTS).forEach(function(pk){
+    var P=PRODUCTS[pk],g=el('section','group');g.id='g-'+pk;
+    g.innerHTML='<h2>'+P.name+'</h2><p>'+BLURB[pk]+'</p>';
+    var grid=el('div','grid');g.appendChild(grid);
+    P.variants.forEach(function(v){grid.appendChild(card(pk,v))});
+    shop.appendChild(g);groups[pk]=g;
+  });
+  function card(pk,v){
+    var si=0,q=1,c=el('article','pcard');c.id='p-'+pk+'-'+v.id;
+    c.innerHTML='<div class="pcard__img"><img alt="'+v.name+'" width="640" height="480" loading="lazy"></div><div class="pcard__body"><small class="tag">'+v.tag+'</small><h3>'+v.name+'</h3><p>'+v.text+'</p><div class="sizes"></div><div class="addrow"><div class="qty"><button type="button" aria-label="Fewer">−</button><output>1</output><button type="button" aria-label="More">+</button></div><button type="button" class="btn btn--gold">Add to cart</button><span class="price-now"></span></div></div>';
+    var im=c.querySelector('img'),sz=c.querySelector('.sizes'),out=c.querySelector('output'),pr=c.querySelector('.price-now'),qb=c.querySelectorAll('.qty button');
+    function paint(){
+      sz.innerHTML='';
+      v.sizes.forEach(function(s,i){var b=el('button','size','<b>'+s[0]+'</b><span>'+money(s[1])+'</span>');b.type='button';b.setAttribute('aria-pressed',i===si);b.onclick=function(){si=i;paint()};sz.appendChild(b)});
+      var src=v.sizes[si][2]||v.img;if(im.getAttribute('src')!==src)im.src=src;
+      out.textContent=q;pr.textContent=money(v.sizes[si][1]*q);
+    }
+    qb[0].onclick=function(){q=Math.max(1,q-1);paint()};qb[1].onclick=function(){q=Math.min(99,q+1);paint()};
+    c.querySelector('.btn').onclick=function(){GAFcart.add(pk,v,si,q)};
+    paint();return c;
+  }
+  function show(k){
+    cur=k;
+    catBtns.forEach(function(b,i){b.setAttribute('aria-pressed',CATS[i][0]===k)});
+    Object.keys(groups).forEach(function(pk){groups[pk].style.display=(k==='all'||k===pk)?'':'none'});
+  }
+  function route(){
+    var h=location.hash.replace('#','');
+    document.querySelectorAll('.pcard.hl').forEach(function(c){c.classList.remove('hl')});
+    if(h==='cart'){show('all');GAFcart.open();return}
+    var m=h.match(/^(honey|oil|turmeric|gulkand|eggs)(?:-(\w+))?$/);
+    if(m){show(m[1]);var c=m[2]&&$('p-'+m[1]+'-'+m[2]);
+      if(c){c.classList.add('hl');setTimeout(function(){c.scrollIntoView({block:'center',behavior:'smooth'})},120)}
+      else window.scrollTo(0,0);
+    } else show('all');
+  }
+  addEventListener('hashchange',route);route();
+  var rv=0;
+})();
+</script>
+</body>
+</html>
