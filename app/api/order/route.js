@@ -6,6 +6,7 @@ import { clean, isPin } from '../../../lib/clean';
 // Shiprocket goes here next: check delivery by pincode, create the shipment.
 // Keep SHIPROCKET_EMAIL and SHIPROCKET_PASSWORD in environment variables, never in the website files.
 export async function POST(req) {
+  if (Number(req.headers.get('content-length') || 0) > 20000) return NextResponse.json({ error: 'Too large' }, { status: 413 });
   let b;
   try { b = await req.json(); } catch { return NextResponse.json({ error: 'Bad request' }, { status: 400 }); }
   const c = b?.customer || {};

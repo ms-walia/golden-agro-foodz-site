@@ -13,7 +13,7 @@ export async function GET(req) {
   try {
     const r = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&zoom=18&lat=${lat}&lon=${lon}`,
-      { headers: { 'User-Agent': 'GoldenAgroFoodz-website/1.0 (handafarm-order-form)', 'Accept-Language': 'en' }, signal: AbortSignal.timeout(8000) }
+      { headers: { 'User-Agent': 'GoldenAgroFoodz-website/1.0 (goldenagrofoodz.com order form)', 'Accept-Language': 'en' }, signal: AbortSignal.timeout(8000) }
     );
     if (!r.ok) throw new Error('geocoder ' + r.status);
     const a = (await r.json()).address || {};
