@@ -1,12 +1,11 @@
-/** The site pages are plain HTML in /public and keep their exact design.
- *  Next.js serves them and adds the backend in /app/api. */
 module.exports = {
   poweredByHeader: false,
-  async rewrites() {
+  async redirects() {
+    // Old .html addresses keep working and point to the clean ones.
     return [
-      { source: '/', destination: '/index.html' },
-      { source: '/shop', destination: '/shop.html' },
-      { source: '/whatwedo', destination: '/whatwedo.html' },
+      { source: '/index.html', destination: '/', permanent: true },
+      { source: '/shop.html', destination: '/shop', permanent: true },
+      { source: '/whatwedo.html', destination: '/whatwedo', permanent: true },
     ];
   },
 };

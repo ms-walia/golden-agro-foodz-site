@@ -1,22 +1,28 @@
 # Golden Agro Foodz website
 
-Next.js project. The pages (`public/index.html`, `shop.html`, `whatwedo.html`) are plain HTML with the same design as before. Next.js serves them and runs the backend in `app/api`.
+A Next.js (App Router) site. Run on Node.js.
 
-## Backend (app/api)
-- `/api/reverse?lat=&lon=`: "Use my current location" turns coordinates into street, city, state and pincode (OpenStreetMap).
-- `/api/pincode?pin=`: pincode to city and state (India Post).
-- `/api/order` (POST): validates the order when the customer taps Send on WhatsApp and logs it. Shiprocket plugs in here next.
+## Structure
+- `app/(home)`: home page `/`
+- `app/(shop)/shop`: shop and cart `/shop`
+- `app/(wwd)/whatwedo`: What we do page `/whatwedo`
+- `app/api`: backend. `/api/reverse` (current location to address), `/api/pincode` (pincode to city and state), `/api/order` (checks and logs each order; Shiprocket plugs in here)
+- `components`: HoneyCard, EnqForm, ShopApp (catalogue, cart, address form), WwdHoney, Fx (scroll effects and menu)
+- `lib/products.js`: **prices, sizes and honey varieties live here**
+- `lib/site.js`: the site domain and WhatsApp number
+- `public/images`: all photos and logos
 
 ## Run
 ```
 npm install
 npm run dev      # http://localhost:3000
+npm run build && npm start
 ```
 
 ## Deploy
-Vercel: import the repo. The framework is detected as Next.js, no settings needed.
-Hostinger: needs a plan with Node.js web apps. Build with `npm run build`, start with `npm start`.
+- Vercel: import the repo, the framework is detected as Next.js. Set `NEXT_PUBLIC_SITE_URL` to the real domain.
+- Hostinger: needs a plan with Node.js web apps. Build command `npm run build`, start command `npm start`.
 
 ## Before launch
-- Replace `https://goldenagrofoodz.com` in the pages, `sitemap.xml` and `robots.txt` with the real domain.
-- Add secrets (later: `SHIPROCKET_EMAIL`, `SHIPROCKET_PASSWORD`) as environment variables on the host, never in `public/`.
+- Set `NEXT_PUBLIC_SITE_URL` (or edit `lib/site.js`) to the real domain. Canonical links, share tags, structured data, the sitemap and robots.txt all use it.
+- Secrets such as `SHIPROCKET_EMAIL` and `SHIPROCKET_PASSWORD` go in environment variables on the host, never in the code.
