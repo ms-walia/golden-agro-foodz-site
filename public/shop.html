@@ -221,8 +221,16 @@ footer{background:#04200f;color:#e9f3ea;padding:46px var(--pad) 26px}
 .drawer__foot{display:flex;gap:10px;padding:14px 22px 22px;background:#fff}
 .drawer__foot .btn{flex:1}
 .drawer label.l{display:block;font-weight:800;font-size:13px;margin:12px 0 4px}
-.drawer input[type=text],.drawer input[type=tel],.drawer textarea{width:100%;border:2px solid #d9c27a;border-radius:14px;padding:12px 14px;font:inherit;background:#fff;color:var(--ink)}
+.drawer input[type=text],.drawer input[type=tel],.drawer input[type=search],.drawer select,.drawer textarea{width:100%;border:2px solid #d9c27a;border-radius:14px;padding:12px 14px;font:inherit;background:#fff;color:var(--ink)}
 .drawer textarea{min-height:76px}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.g2 label.l{margin-top:12px}
+.locbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:6px;min-height:46px;border:2px dashed var(--green);background:#f1f8f2;color:var(--green);border-radius:14px;font:inherit;font-weight:800;cursor:pointer}
+.locbtn[disabled]{opacity:.6;cursor:wait}
+.locbtn svg{width:18px;height:18px}
+.locmsg{font-size:12.5px;margin-top:6px;color:#35503f}
+.locmsg.err{color:#8a2a1a}
+.fld-bad{border-color:#c0392b!important}
 .done{text-align:center;padding:30px 6px}
 .done h3{font-size:30px;color:var(--deep);margin:10px 0}
 .toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-20px);background:var(--deep);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;font-size:14px;z-index:120;opacity:0;pointer-events:none;transition:.35s}
@@ -344,14 +352,27 @@ var BLURB={honey:'Five varieties, each with its own character. Raw and unprocess
   window.GAFcart={add:add,open:function(){step=1;open()}};
   /* cart screen: 1 Cart, 2 Details, 3 Send */
   var step=1,drawer=$('drawer'),scrim=$('scrim'),sentOrder=null;
-  var info={name:'',phone:'',addr:''};
+  var info={name:'',phone:'',flat:'',street:'',landmark:'',city:'',state:'',pin:''};
   function subtotal(){return cart.reduce(function(a,l){return a+l.price*l.q},0)}
   function open(){drawer.classList.add('open');scrim.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';render()}
   function close(){drawer.classList.remove('open');scrim.classList.remove('open');drawer.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+  function addrText(){return [info.flat,info.street,info.landmark?'Near '+info.landmark:'',info.city,info.state+(info.pin?' - '+info.pin:'')].filter(Boolean).join(', ')}
+  var STATES=['Andaman and Nicobar Islands','Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chandigarh','Chhattisgarh','Dadra and Nagar Haveli and Daman and Diu','Delhi','Goa','Gujarat','Haryana','Himachal Pradesh','Jammu and Kashmir','Jharkhand','Karnataka','Kerala','Ladakh','Lakshadweep','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Puducherry','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal'];
+  function matchState(n){n=(n||'').toLowerCase().replace(/&/g,'and');for(var i=0;i<STATES.length;i++){if(STATES[i].toLowerCase()===n)return STATES[i]}for(var j=0;j<STATES.length;j++){var x=STATES[j].toLowerCase();if(n&&(x.indexOf(n)>-1||n.indexOf(x)>-1))return STATES[j]}return ''}
+  function getJSON(u){return fetch(u).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
+  function reverse(lat,lon){
+    return getJSON('/api/reverse?lat='+lat+'&lon='+lon).catch(function(){
+      return getJSON('https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&zoom=18&lat='+lat+'&lon='+lon).then(function(d){var a=d.address||{};
+        return {flat:[a.house_number,a.building].filter(Boolean).join(', '),street:[a.road,a.neighbourhood||a.suburb||a.village||a.hamlet].filter(Boolean).join(', '),city:a.city||a.town||a.village||a.county||a.state_district||'',state:a.state||'',pin:(a.postcode||'').replace(/\D/g,'').slice(0,6)}})})
+  }
+  function lookupPin(pin){
+    return getJSON('/api/pincode?pin='+pin).catch(function(){
+      return getJSON('https://api.postalpincode.in/pincode/'+pin).then(function(d){var o=d&&d[0]&&d[0].PostOffice&&d[0].PostOffice[0];if(!o)throw new Error('none');return {city:o.District,state:o.State}})})
+  }
   function msg(){
     var t='Hello Golden Agro Foodz, I would like to order:\n';
     cart.forEach(function(l,i){t+=(i+1)+'. '+l.name+' ('+l.size+') × '+l.q+' = '+money(l.price*l.q)+'\n'});
-    t+='Total: '+money(subtotal())+'\n\nName: '+info.name+'\nPhone: '+info.phone+'\nAddress: '+info.addr;return t;
+    t+='Total: '+money(subtotal())+'\n\nName: '+info.name+'\nPhone: '+info.phone+'\nAddress: '+addrText();return t;
   }
   function render(){
     var body=$('dbody'),tot=$('totals'),foot=$('dfoot');
@@ -370,11 +391,33 @@ var BLURB={honey:'Five varieties, each with its own character. Raw and unprocess
       tot.innerHTML='<div><span>Subtotal</span><span>'+money(subtotal())+'</span></div><div class="grand"><span>Total</span><span>'+money(subtotal())+'</span></div>';
       var c=el('button','btn btn--gold','Continue');c.onclick=function(){step=2;render()};foot.append(c);
     } else if(step===2){
-      body.innerHTML='<label class="l" for="c-n">Your name</label><input id="c-n" type="text" autocomplete="name"><label class="l" for="c-p">Phone number</label><input id="c-p" type="tel" autocomplete="tel" inputmode="tel"><label class="l" for="c-a">Delivery address</label><textarea id="c-a" autocomplete="street-address"></textarea><p class="note" id="c-e" hidden style="background:#fde6e0;color:#7a2a1a">Please fill in your name, phone and address.</p>';
-      $('c-n').value=info.name;$('c-p').value=info.phone;$('c-a').value=info.addr;
+      var so='<option value="">Select state</option>'+STATES.map(function(x){return '<option>'+x+'</option>'}).join('');
+      body.innerHTML='<label class="l" for="c-n">Your name</label><input id="c-n" type="text" autocomplete="name">'
+        +'<label class="l" for="c-p">Phone number</label><input id="c-p" type="tel" autocomplete="tel" inputmode="tel">'
+        +'<button type="button" class="locbtn" id="c-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7.5"/></svg>Use my current location</button><p class="locmsg" id="c-lm" hidden></p>'
+        +'<label class="l" for="c-f">House / flat / apartment name</label><input id="c-f" type="text" autocomplete="address-line1" placeholder="e.g. Flat 4B, Sunrise Apartments">'
+        +'<label class="l" for="c-s">Street and area</label><input id="c-s" type="text" autocomplete="address-line2" placeholder="Street name, colony or locality">'
+        +'<label class="l" for="c-lmk">Landmark (optional)</label><input id="c-lmk" type="text" placeholder="Near...">'
+        +'<div class="g2"><div><label class="l" for="c-pin">Pincode</label><input id="c-pin" type="text" inputmode="numeric" maxlength="6" autocomplete="postal-code"></div><div><label class="l" for="c-c">City</label><input id="c-c" type="text" autocomplete="address-level2"></div></div>'
+        +'<label class="l" for="c-st">State</label><select id="c-st" autocomplete="address-level1">'+so+'</select>'
+        +'<p class="note" id="c-e" hidden style="background:#fde6e0;color:#7a2a1a">Please fill in your name, a 10 digit phone number, street and area, city, state and a 6 digit pincode.</p>';
+      $('c-n').value=info.name;$('c-p').value=info.phone;$('c-f').value=info.flat;$('c-s').value=info.street;$('c-lmk').value=info.landmark;$('c-pin').value=info.pin;$('c-c').value=info.city;$('c-st').value=info.state;
+      $('c-pin').oninput=function(){var v=this.value.replace(/\D/g,'').slice(0,6);this.value=v;if(v.length===6){lookupPin(v).then(function(r){if(!$('c-c'))return;if(!$('c-c').value)$('c-c').value=r.city||'';var m=matchState(r.state);if(m&&!$('c-st').value)$('c-st').value=m}).catch(function(){})}};
+      $('c-loc').onclick=function(){
+        var btn=this,msgEl=$('c-lm');msgEl.hidden=false;msgEl.className='locmsg';
+        if(!navigator.geolocation){msgEl.className='locmsg err';msgEl.textContent='Your browser cannot share its location. Please type the address.';return}
+        btn.disabled=true;msgEl.textContent='Finding your location...';
+        navigator.geolocation.getCurrentPosition(function(p){
+          reverse(p.coords.latitude.toFixed(6),p.coords.longitude.toFixed(6)).then(function(r){
+            if(!$('c-f'))return;
+            if(r.flat)$('c-f').value=r.flat;if(r.street)$('c-s').value=r.street;if(r.city)$('c-c').value=r.city;if(r.pin)$('c-pin').value=r.pin;var m=matchState(r.state);if(m)$('c-st').value=m;
+            msgEl.textContent='Address filled in. Please check it and add your house or flat name.';btn.disabled=false;
+          }).catch(function(){msgEl.className='locmsg err';msgEl.textContent='Could not find the address. Please type it in.';btn.disabled=false});
+        },function(e){msgEl.className='locmsg err';msgEl.textContent=e&&e.code===1?'Location permission was denied. Please type the address.':'Could not get your location. Please type the address.';btn.disabled=false},{enableHighAccuracy:true,timeout:12000,maximumAge:60000});
+      };
       tot.innerHTML='<div class="grand"><span>Total</span><span>'+money(subtotal())+'</span></div>';
       var b=el('button','btn btn--line','Back');b.style.color='var(--deep)';b.onclick=function(){grab();step=1;render()};
-      var c=el('button','btn btn--gold','Review order');c.onclick=function(){grab();if(!info.name||!info.phone||!info.addr){$('c-e').hidden=false;return}step=3;render()};
+      var c=el('button','btn btn--gold','Review order');c.onclick=function(){grab();var ph=info.phone.replace(/\D/g,'');var bad=[['c-n',!info.name],['c-p',ph.length<10||ph.length>13],['c-s',!info.street],['c-c',!info.city],['c-st',!info.state],['c-pin',!/^\d{6}$/.test(info.pin)]];var any=false;bad.forEach(function(x){var e=$(x[0]);e.classList.toggle('fld-bad',x[1]);if(x[1])any=true});$('c-e').hidden=!any;if(any)return;step=3;render()};
       foot.append(b,c);
     } else {
       var s='<div class="done"><h3>Check and send</h3><p>This is exactly what we will receive on WhatsApp.</p></div>';
@@ -382,11 +425,11 @@ var BLURB={honey:'Five varieties, each with its own character. Raw and unprocess
       tot.innerHTML='<div class="grand"><span>Total</span><span>'+money(subtotal())+'</span></div>';
       var b=el('button','btn btn--line','Back');b.style.color='var(--deep)';b.onclick=function(){step=2;render()};
       var c=el('a','btn btn--green','Send on WhatsApp');c.target='_blank';c.rel='noopener';c.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg());
-      c.onclick=function(){setTimeout(function(){cart=[];save();paintCount();step=1;render();toast('Order message opened in WhatsApp')},400)};
+      c.onclick=function(){try{fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,body:JSON.stringify({customer:info,items:cart.map(function(l){return {name:l.name,size:l.size,qty:l.q,price:l.price}}),total:subtotal()})}).catch(function(){})}catch(e){}setTimeout(function(){cart=[];save();paintCount();step=1;render();toast('Order message opened in WhatsApp')},400)};
       foot.append(b,c);
     }
   }
-  function grab(){var n=$('c-n');if(n){info.name=n.value.trim();info.phone=$('c-p').value.trim();info.addr=$('c-a').value.trim()}}
+  function grab(){var n=$('c-n');if(n){info.name=n.value.trim();info.phone=$('c-p').value.trim();info.flat=$('c-f').value.trim();info.street=$('c-s').value.trim();info.landmark=$('c-lmk').value.trim();info.pin=$('c-pin').value.trim();info.city=$('c-c').value.trim();info.state=$('c-st').value}}
   $('cartbtn').onclick=function(){step=1;open()};$('dclose').onclick=close;scrim.onclick=close;
   addEventListener('keydown',function(e){if(e.key==='Escape')close()});
   paintCount();
